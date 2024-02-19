@@ -1,8 +1,10 @@
 {
+  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "ESNext",
     "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
@@ -12,5 +14,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true
   },
-  "include": ["src", "vite.main.config.ts", "vite.preload.config.ts", "vite.renderer.config.ts", "tsconfig.json", "forge.config.ts"]
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "vite.main.config.ts", "vite.preload.config.ts", "vite.renderer.config.ts", "tsconfig.json", "forge.config.ts", "svelte.config.js"],
+  "exclude": ["node_modules"]
 }
