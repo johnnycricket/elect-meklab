@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-// eslint-disable-next-line import/no-unresolved
 
 // https://vitejs.dev/config
 export default defineConfig({
@@ -9,11 +8,6 @@ export default defineConfig({
     mainFields: ['module', 'jsnext:main', 'jsnext'],
   },
   build: {
-    rollupOptions: {
-      external: [
-        'svelte'
-      ]
-    },
-    outDir: '.vite/build'
+    outDir: '.vite/build',
   }
 });

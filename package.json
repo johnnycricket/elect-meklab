@@ -67,6 +67,12 @@
                 "name": "main_window",
                 "config": "vite.renderer.config.js"
               }
+            ],
+            "plugins": [
+              {
+                "name": "svelte",
+                "config": "svelte.config.mjs"
+              }
             ]
           }
         }
