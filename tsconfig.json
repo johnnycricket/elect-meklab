@@ -1,5 +1,4 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
@@ -10,10 +9,10 @@
     "noImplicitAny": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "outDir": "dist",
+    "outDir": ".vite/build",
     "moduleResolution": "node",
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "vite.main.config.ts", "vite.preload.config.ts", "vite.renderer.config.ts", "tsconfig.json", "forge.config.ts", "svelte.config.js"],
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "vite.main.config.js", "vite.preload.config.js", "vite.renderer.config.js", "tsconfig.json", "notaforgeconfig.ts", "svelte.config.js"],
   "exclude": ["node_modules"]
 }

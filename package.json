@@ -4,8 +4,12 @@
   "description": "electron fork and adaptation of megameks meklab",
   "main": ".vite/build/main.js",
   "scripts": {
-    "start": "electron-forge start",
-    "dev-svelte": "vite",
+    "start": "concurrently --kill-others vite \"npm run dev:electron\"",
+    "start-forge": "electron-forge start",
+    "dev:electron": "cross-env DEV_ENV=true electron .",
+    "dev:vite": "vite",
+    "build": "vite build",
+    "build:main": "vite build --config ./vite.main.config.js",
     "preview": "vite preview",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -26,6 +30,8 @@
     "@tsconfig/svelte": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "electron": "28.2.3",
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.1",
@@ -39,5 +45,32 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
+  },
+  "config": {
+    "forge": {
+      "plugins": [
+        {
+          "name": "@electron-forge/plugin-vite",
+          "config": {
+            "build": [
+              {
+                "entry": "src/main.ts",
+                "config": "vite.main.config.js"
+              },
+              {
+                "entry": "src/preload.ts",
+                "config": "vite.preload.config.js"
+              }
+            ],   
+            "renderer": [
+              {
+                "name": "main_window",
+                "config": "vite.renderer.config.js"
+              }
+            ]
+          }
+        }
+      ]
+    }
   }
 }
