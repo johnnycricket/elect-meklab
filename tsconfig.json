@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "commonjs",
     "allowJs": true,
-    "checkJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "outDir": ".vite/build",
+    "outDir": "dist",
     "moduleResolution": "node",
-    "resolveJsonModule": true
-  },
-  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "vite.main.config.js", "vite.preload.config.js", "vite.renderer.config.js", "tsconfig.json", "notaforgeconfig.ts", "svelte.config.mjs"],
-  "exclude": ["node_modules"]
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "jsx":"react-jsx"
+  }
 }
