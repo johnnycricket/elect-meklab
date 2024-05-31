@@ -1,9 +1,14 @@
 export enum TechLvl {
+    TECHUNK = 'unkown',
+    TECHINTRO = 'intro boxset',
     ISONE = 'is level 1',
     ISTWO = 'is level 2',
+    ISADV = 'is level advanced',
+    ISEXP = 'is level experimental',
     CLANONE = 'clan level 1',
     CLANTWO = 'clan level 2',
-    
+    CLANADV = 'clan level advanced',
+    CLANEXP = 'clan level experimental'
 }
 
 export enum UnitRole {
