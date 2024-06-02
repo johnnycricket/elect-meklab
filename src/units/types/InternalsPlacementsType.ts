@@ -1,3 +1,8 @@
+export type locInternalTuple = [
+    LocationsEnum,
+    number
+];
+
 export type InternalsPlacementsType = {
     place: LocationsEnum;
     slots: [

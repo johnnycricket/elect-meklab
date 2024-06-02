@@ -1,10 +1,6 @@
 import { TechLvl } from "../units/types/MiscRecordTypes";
 import {engineWeightMap, engineTypes} from "../units/types/EngineConstants";
-
-type locInternalTuple = [
-    string,
-    number
-];
+import {locInternalTuple, LocationsEnum} from "../units/types/InternalsPlacementsType";
 
 type engineDetails = {
     walking: number;
@@ -23,7 +19,7 @@ export class EngineFactory {
     type: engineTypes = engineTypes.NORMAL;
     engineWeight = 0;
     engineHS = [0, 0];
-    engineInternals: locInternalTuple[] = [['center', 6]]
+    engineInternals: locInternalTuple[] = [[LocationsEnum['CT'], 6]]
 
     private checkEngineWeight(rating: number): number {
         const weightmap = engineWeightMap();
@@ -68,12 +64,12 @@ export class EngineFactory {
                 break;
             case 'Extralight':
                 if(tech === TechLvl.CLANTWO) {
-                    this.engineInternals.push(['right', 2]);
-                    this.engineInternals.push(['left', 2]);
+                    this.engineInternals.push([LocationsEnum['RT'], 2]);
+                    this.engineInternals.push([LocationsEnum['LT'], 2]);
                 }
                 if(tech === TechLvl.ISTWO) {
-                    this.engineInternals.push(['right', 3]);
-                    this.engineInternals.push(['left', 3]);
+                    this.engineInternals.push([LocationsEnum['RT'], 3]);
+                    this.engineInternals.push([LocationsEnum['LT'], 3]);
                 }
                 break;
             default:
