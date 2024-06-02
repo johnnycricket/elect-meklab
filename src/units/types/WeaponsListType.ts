@@ -1,4 +1,4 @@
-import { LocationsEnum } from "./InternalsPlacementsType";
+import { LocationsEnum } from "./InternalType";
 import { TechLvl } from "./MiscRecordTypes";
 
 export type WeaponsListType = {

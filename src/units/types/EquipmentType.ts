@@ -5,3 +5,4 @@ export type GenericEquipmentType = {
     slotsRemaining: number;
     contiguous: boolean;
 }
+

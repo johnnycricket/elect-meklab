@@ -1,6 +1,6 @@
 import { TechLvl } from "../units/types/MiscRecordTypes";
 import {engineWeightMap, engineTypes} from "../units/types/EngineConstants";
-import {locInternalTuple, LocationsEnum} from "../units/types/InternalsPlacementsType";
+import {locInternalTuple, LocationsEnum} from "../units/types/InternalType";
 
 type engineDetails = {
     walking: number;

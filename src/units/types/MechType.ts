@@ -1,5 +1,5 @@
 import { CBTBipedMechArmor } from "./ArmorType";
-import { InternalsPlacementsType } from "./InternalsPlacementsType";
+import { InternalsPlacementsType } from "./InternalType";
 import { Fluff, MoveTypeEnum, Movements, TechLvl, TransportersEnum, UnitRole } from "./MiscRecordTypes";
 import { QuirkTypes } from "./QuirkTypes";
 
