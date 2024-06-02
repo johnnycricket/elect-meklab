@@ -1,19 +1,20 @@
-import { engineWeightTable } from "../units/types/EngineConstants";
-
-enum engineTypes {
-    'NORMAL' = 'Normal',
-    'L' = 'Light',
-    'XL' = 'Extralight',
-    'XXL' = 'Extra Extralight',
-    'P' = 'Primitive',
-    'ICE' = 'Internal Combustion',
-    'C' = 'Compact'
-}
+import { TechLvl } from "../units/types/MiscRecordTypes";
+import {engineWeightMap, engineTypes} from "../units/types/EngineConstants";
 
 type locInternalTuple = [
     string,
     number
-]
+];
+
+type engineDetails = {
+    walking: number;
+    running: number;
+    rating: number;
+    type: engineTypes;
+    engineWeight: number;
+    engineHeatSinks: number[];
+    engineInternals: locInternalTuple[];
+}
 
 export class EngineFactory {
     walking = 0;
@@ -22,12 +23,19 @@ export class EngineFactory {
     type: engineTypes = engineTypes.NORMAL;
     engineWeight = 0;
     engineHS = [0, 0];
-    engineInternals: locInternalTuple[] = [['center', 1]]
+    engineInternals: locInternalTuple[] = [['center', 6]]
 
     private checkEngineWeight(rating: number): number {
-        let engineTonnage = 0;
+        const weightmap = engineWeightMap();
 
-        engineWeightTable.
+        let engineTonnage = 0;
+        weightmap.forEach((rArray, key) => {
+            const found = rArray.includes(rating);
+            if (found) {
+                engineTonnage = parseInt(key);
+            }
+
+        })
 
         return engineTonnage;
     }
@@ -38,7 +46,7 @@ export class EngineFactory {
             //need builder error handler...
             console.log('engine rating cannot below 10 or above 400');
         }
-        this.engineWeight = checkEngineWeight(rating);
+        this.engineWeight = this.checkEngineWeight(this.rating);
     }
 
     private runningMath(walking: number): void {
@@ -55,7 +63,22 @@ export class EngineFactory {
     }
 
     private engineInteralsGenerator(type: engineTypes, tech: string): void {
-
+        switch (type) {
+            case 'Normal':
+                break;
+            case 'Extralight':
+                if(tech === TechLvl.CLANTWO) {
+                    this.engineInternals.push(['right', 2]);
+                    this.engineInternals.push(['left', 2]);
+                }
+                if(tech === TechLvl.ISTWO) {
+                    this.engineInternals.push(['right', 3]);
+                    this.engineInternals.push(['left', 3]);
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     public get getWalking() {
@@ -82,7 +105,35 @@ export class EngineFactory {
         return this.engineInternals;
     }
 
-    public set calculateEngine(walk: number, type: engineTypes) {
-        
+    public calculateEngine(walk: number, tonnage: number, type: engineTypes, tech: TechLvl): engineDetails {
+        this.ratingMath(walk, tonnage);
+        this.runningMath(walk);
+        this.engineHeatSinkMath(this.rating);
+        this.engineInteralsGenerator(type, tech);
+        this.walking = walk;
+
+        const eng: engineDetails = {
+            walking: this.walking,
+            running: this.running,
+            rating: this.rating,
+            type: this.type,
+            engineWeight: this.engineWeight,
+            engineHeatSinks: this.engineHS,
+            engineInternals: this.engineInternals
+        }
+
+        return eng;
+    }
+
+    public getEngineDetails(): engineDetails {
+        return {
+            walking: this.walking,
+            running: this.running,
+            rating: this.rating,
+            type: this.type,
+            engineWeight: this.engineWeight,
+            engineHeatSinks: this.engineHS,
+            engineInternals: this.engineInternals
+        }
     }
 }

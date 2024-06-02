@@ -1,7 +1,7 @@
 export const engineWeightMap = (): Map<string, number[]> => {
     const ewMap = new Map();
 
-    ewMap.set('0.5', [10, 15, 20, 25]););
+    ewMap.set('0.5', [10, 15, 20, 25]);
     ewMap.set('1', [30, 35, 40, 45]);
     ewMap.set('1.5', [50, 55, 60]);
     ewMap.set('2', [65, 70, 75]);
@@ -57,4 +57,14 @@ export const engineWeightMap = (): Map<string, number[]> => {
     ewMap.set('52.5', [400]);
 
     return ewMap;
+}
+
+export enum engineTypes {
+    'NORMAL' = 'Normal',
+    'L' = 'Light',
+    'XL' = 'Extralight',
+    'XXL' = 'Extra Extralight',
+    'P' = 'Primitive',
+    'ICE' = 'Internal Combustion',
+    'C' = 'Compact'
 }
