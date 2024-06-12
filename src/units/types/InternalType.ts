@@ -6,9 +6,11 @@ export type locInternalTuple = [
 ];
 
 export enum StructureTypeEnum {
-    'STANDARD' = 'Standard'
+    'STANDARD' = 'Standard',
+    'ENDO' = 'Endo-Steel',
 }
 
+// todo: move this to either a nested aspect of 
 export type InternalsPlacementsType = {
     place: LocationsEnum;
     slots: [
@@ -28,6 +30,7 @@ export type InternalsPlacementsType = {
 }
 
 export enum LocationsEnum {
+    HD = "Head",
     LA = "Left Arm",
     RA = "Right Arm",
     LT = "Left Torso",
@@ -43,17 +46,14 @@ export enum LocationsEnum {
 export type CBTBipedMechInternal = {
     structureType: StructureTypeEnum;
     tonnage: number;
-    LA: AmountUsedMaxTuple[];
-    RA: AmountUsedMaxTuple[];
-    LT: AmountUsedMaxTuple[];
-    RT: AmountUsedMaxTuple[];
-    CT: AmountUsedMaxTuple[];
-    HD: AmountUsedMaxTuple[];
-    LL: AmountUsedMaxTuple[];
-    RL: AmountUsedMaxTuple[];
-    RTL: AmountUsedMaxTuple[];
-    RTR: AmountUsedMaxTuple[];
-    RTC: AmountUsedMaxTuple[];
+    LA: AmountUsedMaxTuple;
+    RA: AmountUsedMaxTuple;
+    LT: AmountUsedMaxTuple;
+    RT: AmountUsedMaxTuple;
+    CT: AmountUsedMaxTuple;
+    HD: AmountUsedMaxTuple;
+    LL: AmountUsedMaxTuple;
+    RL: AmountUsedMaxTuple;
 }
 
 export type DestBipedMechInternal = {
@@ -65,6 +65,14 @@ export type DestBipedMechInternal = {
     HD: AmountUsedMaxTuple[];
     LL: AmountUsedMaxTuple[];
     RL: AmountUsedMaxTuple[];
-    RTC: AmountUsedMaxTuple[];
+}
 
+export type internalCritSlotInventory = {
+    critItem: {
+        remaining: number;
+        contiguous: boolean;
+        id: number;
+        name: string;
+        allowedLocs: string[];
+    }
 }
