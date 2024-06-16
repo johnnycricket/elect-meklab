@@ -32,6 +32,32 @@ describe('critical slot class tests', () => {
 
         expect(actual.free).toEqual(1);
         expect(actual.atIndexes[0]).toEqual(3);
+    });
+
+    it('should be able to set the free space in the head', () => {
+        critClass.setHD('Small Laser', [3]);
+
+        const actual = critClass.getCritLocation('HD');
+
+        expect(actual[3]).toBe('Small Laser');
+    })
+
+    it('should add new equipment to a specified loc and index', () => {
+        critClass.setCrits('Small Laser', 'RA', [4]);
+
+        const actual = critClass.getCritLocation('RA');
+
+        expect(actual[4]).toBe('Small Laser');
+    });
+
+    it('should add new multislot equipment at specified loc and indecies', () => {
+        critClass.setCrits('Double Heat Sink', 'RT', [0, 1, 2]);
+
+        const actual = critClass.getCritLocation('RT');
+
+        expect(actual[0]).toBe('Double Heat Sink');
+        expect(actual[1]).toBe('Double Heat Sink');
+        expect(actual[2]).toBe('Double Heat Sink');
     })
 
     it('should get any crit table location when loc abbr passed in', () => {

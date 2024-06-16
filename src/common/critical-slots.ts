@@ -62,8 +62,22 @@ export class CriticalSlots {
     }
 
     public setCrits(gear: string, loc: string, atSpot: number[]) {
-        
-       // const currLoc = this.assigned[loc]
+        const spotsNeeded = atSpot.length;
+        const locName = loc as keyof MechCritTable;
+        const neededLoc = this.getCritLocation(loc);
+        const openSpace = this.isLocAtMax(neededLoc, false);
+
+        if (openSpace.free < spotsNeeded) {
+            console.log('no free space available. cannot set critial space');
+        }
+
+        atSpot.forEach(val => {
+            const isFree = openSpace.atIndexes.find(i => i === val);
+
+            if(isFree !== undefined && isFree >= 0){
+                this.assigned[locName][val] = gear;
+            }
+        })
     }
 
     public getCritLocation(loc: string): string[] {
