@@ -1,7 +1,7 @@
 import {describe, it, beforeEach, expect} from 'vitest';
 
 import { ArmorFactory } from './armor-factory';
-import { ArmorTypeEnum } from '../units/types/ArmorType';
+import { ArmorTypeEnum } from './types/ArmorType';
 import { TechLvl } from '../units/types/MiscRecordTypes';
 
 

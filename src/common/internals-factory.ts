@@ -1,6 +1,6 @@
 import { TechLvl } from "../units/types/MiscRecordTypes";
-import { LocationsEnum, StructureTypeEnum, CBTBipedMechInternal } from "../units/types/InternalType";
-import { InternalConstantDetails, InternalsTable } from "../units/types/InternalConstants";
+import { LocationsEnum, StructureTypeEnum, CBTBipedMechInternal } from "./types/InternalType";
+import { InternalConstantDetails, InternalsTable } from "./types/InternalConstants";
 
 export class InternalsFactory{
     internals: CBTBipedMechInternal = {

@@ -1,7 +1,8 @@
-import { CBTBipedMechArmor } from "./ArmorType";
-import { InternalsPlacementsType } from "./InternalType";
+import { CBTBipedMechArmor } from "../../common/types/ArmorType";
+import { InternalsPlacementsType } from "../../common/types/InternalType";
 import { Fluff, MoveTypeEnum, Movements, TechLvl, TransportersEnum, UnitRole } from "./MiscRecordTypes";
 import { QuirkTypes } from "./QuirkTypes";
+import { WeaponsListType } from "./WeaponsListType";
 
 export enum MechEnum {
     BMECH = 'battlemech',

@@ -1,7 +1,7 @@
 import {describe, it, beforeEach, expect} from 'vitest';
 
 import { EngineFactory } from './engine-factory';
-import { engineTypes } from '../units/types/EngineConstants';
+import { engineTypes } from './types/EngineConstants';
 import { TechLvl } from '../units/types/MiscRecordTypes';
 
 describe('engine factory tests', () => {

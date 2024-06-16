@@ -1,7 +1,7 @@
-import { locInternalTuple } from "../units/types/InternalType";
-import { AmountUsedMaxTuple, ArmorTypeEnum, CBTBipedMechArmor } from "../units/types/ArmorType";
+import { locInternalTuple } from "./types/InternalType";
+import { AmountUsedMaxTuple, ArmorTypeEnum, CBTBipedMechArmor } from "./types/ArmorType";
 import { TechLvl } from "../units/types/MiscRecordTypes";
-import { InternalConstantDetails, InternalsTable } from "../units/types/InternalConstants";
+import { InternalConstantDetails, InternalsTable } from "./types/InternalConstants";
 
 export class ArmorFactory {
     type = ArmorTypeEnum.STANDARD;
