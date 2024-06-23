@@ -6,8 +6,8 @@ export type locInternalTuple = [
 ];
 
 export enum StructureTypeEnum {
-    'STANDARD' = 'Standard',
-    'ENDO' = 'Endo-Steel',
+    STANDARD = 'Standard',
+    ENDO = 'Endo-Steel',
 }
 
 // todo: move this to either a nested aspect of 

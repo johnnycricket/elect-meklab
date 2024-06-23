@@ -65,4 +65,4 @@ describe('critical slot class tests', () => {
 
         expect(actual[0]).toBe('Hip');
     });
-})
+});

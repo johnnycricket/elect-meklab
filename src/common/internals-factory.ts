@@ -73,13 +73,6 @@ export class InternalsFactory{
         return tons * 0.1;
     }
 
-    private getMaxArmor(tonnage: string): number {
-        const max = InternalsTable().get(tonnage) || this.defaultNotFoundInterals;
-        const hasMax = Object.prototype.hasOwnProperty.call(max, 'maxArmor');
-
-        return hasMax ? max['maxArmor' as keyof typeof max] : 0;
-    }
-
     getStructurePips(tons: number, loc: LocationsEnum): number {
         const locKeyStr = Object.keys(LocationsEnum)[Object.values(LocationsEnum).indexOf(loc)];
         const inEntry = InternalsTable().get(tons.toString()) || this.defaultNotFoundInterals;
