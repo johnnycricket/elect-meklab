@@ -2,10 +2,15 @@ import { JSX } from "react/jsx-runtime";
 
 type pipTypes = 'armor' | 'structure';
 
-export function Pips(
-    count: number | 0,
-    type: pipTypes,
-): JSX.Element {
+interface pipProps {
+    count: number,
+    type: pipTypes
+}
+
+export function Pips({
+    count,
+    type
+}: pipProps): JSX.Element {
     const pipArray: JSX.Element[] = [];
 
     const allPips = (count: number, type: pipTypes) => {

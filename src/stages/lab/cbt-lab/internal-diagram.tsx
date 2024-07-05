@@ -1,12 +1,13 @@
-import { ArmorSection } from "./armor-section";
+import { InternalSection } from "./internal-section";
 import { Pips } from "../../../common/pips";
 
-export function ArmorDiagram() {
+
+export function InternalDiagram() {
     return (
         <section>
-            <ArmorSection>
-                <Pips count={0} type="armor"></Pips>
-            </ArmorSection>
+            <InternalSection>
+                <Pips count={0} type="structure"/>
+            </InternalSection>
             <div>
                 
            </div>
