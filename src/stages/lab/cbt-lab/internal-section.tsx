@@ -1,11 +1,19 @@
-import { Children } from "react";
+type InternalDiagramProps = {
+    loc: string;
+    prettyLoc: string;
+    children: JSX.Element;
+};
 
-export function InternalSection() {
+export function InternalSection({
+    children,
+    loc,
+    prettyLoc
+}: InternalDiagramProps) {
     
     return (
         <>
             <slot>
-                {Children}
+                {children}
             </slot>
         </>
     )

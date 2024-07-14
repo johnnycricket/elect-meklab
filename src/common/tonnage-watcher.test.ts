@@ -12,6 +12,7 @@ describe('Tonnage Watcher', () => {
     it('should give remaining tonnage on a 50 ton mech after gyro and engine added', () => {
         tWatcher.totalTonnage = 50;
         tWatcher.addToUsedList({
+            id: 1,
             name: "engine",
             tonnage: 10,
             slots: 6,
@@ -19,6 +20,7 @@ describe('Tonnage Watcher', () => {
             contiguous: false
         })
         tWatcher.addToUsedList({
+            id: 2,
             name: "gyro",
             tonnage: 3,
             slots: 3,
