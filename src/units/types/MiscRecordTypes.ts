@@ -11,12 +11,16 @@ export enum TechLvl {
     CLANEXP = 'clan level experimental'
 }
 
+
+
 export enum UnitRole {
     NONE = 'none',
     AMBUSHER = 'ambusher',
     MISSILEBOAT = 'missle boat',
     SCOUT = 'scout',
     JUGGERNAUT = 'juggernaut',
+    BRAWLER = 'brawler',
+    SKIRMISHER = 'skirmisher'
 
 }
 

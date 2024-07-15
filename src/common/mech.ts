@@ -1,3 +1,4 @@
+import { Fluff } from "../fluff/fluff";
 import { ArmorFactory } from "./armor-factory";
 import { CriticalSlots } from "./critical-slots";
 import { InternalsFactory } from "./internals-factory";
@@ -10,4 +11,5 @@ export class Mech {
     armor = new ArmorFactory();
     equipment = [];
     tonnage = new TonnageWatcher();
+    fluff = new Fluff();
 }
