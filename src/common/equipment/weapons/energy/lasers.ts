@@ -238,6 +238,48 @@ export class LaserClass {
             slotsRemaining: 1,
             contiguous: false
         },
+        {
+            tech: TechLvl.ISONE,
+            shortName: "ppc",
+            range: [3, [1, 6], [7, 12], [13, 18]],
+            damage: "10",
+            heat: 10,
+            size: 3,
+            id: 15,
+            name: "PPC",
+            tonnage: 7,
+            slots: 3,
+            slotsRemaining: 3,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.ISTWO,
+            shortName: "erppc",
+            range: [0, [1,7], [8,14], [15,23]],
+            damage: "10",
+            heat: 15,
+            size: 3,
+            id: 16,
+            name: "ER PPC",
+            tonnage: 7,
+            slots: 3,
+            slotsRemaining: 3,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.CLANTWO,
+            shortName: "cerppc",
+            range: [3, [1, 6], [7, 12], [13, 18]],
+            damage: "15",
+            heat: 15,
+            size: 2,
+            id: 17,
+            name: "Clan ER PPC",
+            tonnage: 6,
+            slots: 2,
+            slotsRemaining: 2,
+            contiguous: true
+        }
     ]
 
     public getLaser(shortLaserName: string): LaserType {
