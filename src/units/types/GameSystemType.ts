@@ -6,10 +6,10 @@ export enum GameTypeAbbrEnum {
 }
 
 export enum GameTypeEnum {
-    CBT = "Classic Battletech",
-    DST = "Battletech Destiny",
-    AS = "Alpha Strike",
-    OV = "Override"
+    CBT = 'Classic Battletech',
+    DST = 'Battletech Destiny',
+    AS = 'Alpha Strike',
+    OV = 'Override'
 }
 
 export enum PlayingFieldEnum {

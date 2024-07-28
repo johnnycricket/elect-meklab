@@ -1,32 +1,20 @@
 import { TechLvl } from "../../../../units/types/MiscRecordTypes";
-import { GameSystem, GameTypeAbbrEnum, GameTypeEnum, PlayingFieldEnum } from "../../../../units/types/GameSystemType";
 import { GenericEquipmentType } from "../../../../units/types/EquipmentType";
-
-export enum SRMTypeEnum {
-    NORMAL = 'normal',
-    STREAK = 'streak'
-}
+import { RangesType } from "../../../../common/types/RangeType";
 
 export interface SRMType extends GenericEquipmentType {
-    gametype: GameSystem;
     tech: TechLvl;
     shortName: string;
-    range: number[];
+    range: RangesType;
     damage: string;
     heat: number;
     size: number;
 }
-
 export class SRMClass {
     public srmObj: SRMType = {
-        gametype: {
-            gametype: GameTypeEnum.CBT,
-            gametypeAbbr: GameTypeAbbrEnum.CBT,
-            board: PlayingFieldEnum.HEX
-        },
         tech: TechLvl.TECHUNK,
         shortName: "",
-        range: [],
+        range: [0, [0,0], [0,0], [0,0]],
         damage: "",
         heat: 0,
         size: 0,
@@ -37,71 +25,163 @@ export class SRMClass {
         slotsRemaining: 0,
         contiguous: false
     }
-    private getTonnage(size:number): number {
-        switch (size) {
-            case 6:
-                return 3;
-            case 4:
-                return 2;
-            default:
-                return 1;
-        } 
-    }
 
-    private getCritSize(size: number): number {
-        switch (size) {
-            case 6: 
-                return 2;
-            default: 
-                return 1;
+    public srms: SRMType[] = [
+        {
+            tech: TechLvl.ISONE,
+            shortName: "srm2",
+            range: [0, [1, 3], [4, 6], [7, 9]],
+            damage: '2/Msl',
+            heat: 2,
+            size: 1,
+            id: 0,
+            name: "SRM 2",
+            tonnage: 1,
+            slots: 1,
+            slotsRemaining: 1,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.ISONE,
+            shortName: "srm4",
+            range: [0, [1, 3], [4, 6], [7, 9]],
+            damage: '2/Msl',
+            heat: 3,
+            size: 1,
+            id: 1,
+            name: "SRM 4",
+            tonnage: 2,
+            slots: 1,
+            slotsRemaining: 1,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.ISONE,
+            shortName: "srm6",
+            range: [0, [1, 3], [4, 6], [7, 9]],
+            damage: '2/Msl',
+            heat: 4,
+            size: 2,
+            id: 2,
+            name: "SRM 6",
+            tonnage: 3,
+            slots: 2,
+            slotsRemaining: 2,
+            contiguous: false
+        },
+        {
+            tech: TechLvl.ISTWO,
+            shortName: 'ssrm2',
+            range: [0, [1, 3], [4, 6], [7, 9]],
+            damage: '2/Msl',
+            heat: 2,
+            size: 1,
+            id: 3,
+            name: "Streak SRM 2",
+            tonnage: 1.5,
+            slots: 1,
+            slotsRemaining: 1,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.CLANONE,
+            shortName: 'csrm2',
+            range: [0, [1, 3], [4, 6], [7, 9]],
+            damage: '2/Msl',
+            heat: 2,
+            size: 1,
+            id: 4,
+            name: "Clan SRM 2",
+            tonnage: 0.5,
+            slots: 1,
+            slotsRemaining: 1,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.CLANONE,
+            shortName: 'csrm4',
+            range: [0, [1, 3], [4, 6], [7, 9]],
+            damage: "2/Msl",
+            heat: 3,
+            size: 1,
+            id: 5,
+            name: "Clan SRM 4",
+            tonnage: 2,
+            slots: 1,
+            slotsRemaining: 1,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.CLANONE,
+            shortName: 'csrm6',
+            range: [0, [1, 3], [4, 6], [7, 9]],
+            damage: "2/Msl",
+            heat: 4,
+            size: 1,
+            id: 6,
+            name: "Clan SRM 6",
+            tonnage: 1.5,
+            slots: 1,
+            slotsRemaining: 1,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.CLANTWO,
+            shortName: 'cssrm2',
+            range: [0, [1, 4], [5, 8], [9, 12]],
+            damage: "2/Msl",
+            heat: 2,
+            size: 1,
+            id: 7,
+            name: "Streak SRM 2",
+            tonnage: 1,
+            slots: 1,
+            slotsRemaining: 1,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.CLANTWO,
+            shortName: "cssrm4",
+            range: [0, [1, 4], [5, 8], [9, 12]],
+            damage: "2/Msl",
+            heat: 3,
+            size: 1,
+            id: 8,
+            name: "Streak SRM 4",
+            tonnage: 2,
+            slots: 1,
+            slotsRemaining: 1,
+            contiguous: true
+        },
+        {
+            tech: TechLvl.CLANTWO,
+            shortName: "cssrm6",
+            range: [0, [1, 4], [5, 8], [9, 12]],
+            damage: "2/Msl",
+            heat: 4,
+            size: 2,
+            id: 9,
+            name: "Streak SRM 6",
+            tonnage: 3,
+            slots: 2,
+            slotsRemaining: 2,
+            contiguous: true
         }
+    ]
+
+    public getSrm(aSrm: string): SRMType {
+        const found = this.srms.filter(srm => {
+            return srm.shortName == aSrm;
+        })
+
+        return found[0];
     }
 
-    private getHeatSize(size: number): number {
-        switch (size) {
-            case 6:
-                return 4;
-            case 4:
-                return 3;
-            default:
-                return 2;
-        }
-    }
+    public getSrmsByTech(tech:TechLvl): SRMType[] {
+        const found = this.srms.filter(srm => {
+            return srm.tech == tech;
+        })
 
-    private getName(type: SRMTypeEnum, size: number): string {
-        switch (type) {
-            case 'streak':
-                return `streak short range missile launcher ${size}`;
-            default:
-                return `short range missile launcher ${size}`;
-        }
-    }
-
-    private getShortName(type: SRMTypeEnum, size: number): string {
-        switch (type) {
-            case 'streak':
-                return `ssrm-${size}`;
-            default:
-                return `srm-${size}`;
-        }
-    }
-
-    public genSRM(system: GameSystem, tech: TechLvl, size: number, type: SRMTypeEnum): SRMType {
-        const aSRM = this.srmObj;
-
-        aSRM.contiguous = true;
-        aSRM.tech = tech;
-        aSRM.size = size;
-        aSRM.slots = this.getCritSize(size);
-        aSRM.slotsRemaining = this.getCritSize(size);
-        aSRM.name = this.getName(type, size);
-        aSRM.shortName = this.getShortName(type, size);
-        aSRM.tonnage = this.getTonnage(size);
-        aSRM.heat = this.getHeatSize(size);
-        aSRM.damage = '2ml';
-        aSRM.range = [0, 3, 6, 9];
-        aSRM.gametype = system;
-
-        return aSRM;
+        return found;
     }
 }
