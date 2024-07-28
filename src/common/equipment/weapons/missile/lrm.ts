@@ -40,6 +40,7 @@ export class LRMClass {
             tonnage: 2,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 24,
             contiguous: false
         },{
             tech: TechLvl.ISONE,
@@ -53,6 +54,7 @@ export class LRMClass {
             tonnage: 5,
             slots: 2,
             slotsRemaining: 2,
+            ammoPerTon: 12,
             contiguous: true
         },{
             tech: TechLvl.ISONE,
@@ -66,6 +68,7 @@ export class LRMClass {
             tonnage: 7,
             slots: 3,
             slotsRemaining: 3,
+            ammoPerTon: 8,
             contiguous: true
         },{
             tech: TechLvl.ISONE,
@@ -79,6 +82,7 @@ export class LRMClass {
             tonnage: 10,
             slots: 5,
             slotsRemaining: 5,
+            ammoPerTon: 6,
             contiguous: true
         },{
             tech: TechLvl.CLANONE,
@@ -92,6 +96,7 @@ export class LRMClass {
             tonnage: 1,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 24,
             contiguous: false
         },{
             tech: TechLvl.CLANONE,
@@ -105,6 +110,7 @@ export class LRMClass {
             tonnage: 2.5,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 12,
             contiguous: false
         },{
             tech: TechLvl.CLANONE,
@@ -118,6 +124,7 @@ export class LRMClass {
             tonnage: 3.5,
             slots: 2,
             slotsRemaining: 2,
+            ammoPerTon: 8,
             contiguous: true
         },{
             tech: TechLvl.CLANONE,
@@ -131,6 +138,7 @@ export class LRMClass {
             tonnage: 5,
             slots: 4,
             slotsRemaining: 4,
+            ammoPerTon: 6,
             contiguous: true
         },
     ]

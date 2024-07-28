@@ -4,5 +4,6 @@ export type GenericEquipmentType = {
     tonnage: number;
     slots: number;
     slotsRemaining: number;
+    ammoPerTon?: number;
     contiguous: boolean;
 }

@@ -39,6 +39,7 @@ export class SRMClass {
             tonnage: 1,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 50,
             contiguous: true
         },
         {
@@ -53,6 +54,7 @@ export class SRMClass {
             tonnage: 2,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 25,
             contiguous: true
         },
         {
@@ -67,6 +69,7 @@ export class SRMClass {
             tonnage: 3,
             slots: 2,
             slotsRemaining: 2,
+            ammoPerTon: 15,
             contiguous: false
         },
         {
@@ -81,6 +84,7 @@ export class SRMClass {
             tonnage: 1.5,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 50,
             contiguous: true
         },
         {
@@ -95,6 +99,7 @@ export class SRMClass {
             tonnage: 0.5,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 50,
             contiguous: true
         },
         {
@@ -109,6 +114,7 @@ export class SRMClass {
             tonnage: 2,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 25,
             contiguous: true
         },
         {
@@ -123,6 +129,7 @@ export class SRMClass {
             tonnage: 1.5,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 15,
             contiguous: true
         },
         {
@@ -137,6 +144,7 @@ export class SRMClass {
             tonnage: 1,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 50,
             contiguous: true
         },
         {
@@ -151,6 +159,7 @@ export class SRMClass {
             tonnage: 2,
             slots: 1,
             slotsRemaining: 1,
+            ammoPerTon: 25,
             contiguous: true
         },
         {
@@ -165,6 +174,7 @@ export class SRMClass {
             tonnage: 3,
             slots: 2,
             slotsRemaining: 2,
+            ammoPerTon: 15,
             contiguous: true
         }
     ]
