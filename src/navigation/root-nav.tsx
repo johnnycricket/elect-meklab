@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FileLoad } from '../stages/sheets/fileLoadDialog';
 
 interface NavProps {
     page: 'landing' | 'lab-cbt' | 'lab-dest' | 'force';
@@ -9,6 +10,8 @@ function RootNav(
         page
     }: NavProps
 ): JSX.Element {
+    const [paths, setPaths] = useState<string[]>([]);
+    
     return (
         <>
             <nav>
@@ -23,7 +26,7 @@ function RootNav(
                 {page === 'lab-cbt' && (
                     <ol>
                         <li>New</li>
-                        <li>Load</li>
+                        <FileLoad filePathsOut={setPaths}></FileLoad>
                         <li>Unit Settings</li>
                         <li>Save</li>
                     </ol>
