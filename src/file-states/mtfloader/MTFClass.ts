@@ -33,6 +33,20 @@ export class MTFClass {
     }
 
     public reader(contents: string) {
+        const multilineOptions = ['Armor', 'Weapons', 'Left Arm', 'Right Arm', 'Left Torso', 'Right Torso', 'Center Torso', 'Head', 'Left Leg', 'Right Leg'] 
+        const retObj = {};  //currently arbitrary because could be any kind of unit except vehicles and some battle armor.
+        const firstPass = contents.split('\n');
+        const secondPass = firstPass.filter((line) => {
+            if(line !== '') { return }
+        });
+
+        secondPass.forEach((line, i) => {
+            const lineSplit = line.split(':');
+            if(multilineOptions.includes(lineSplit[0])) {
+                this.multiLines()
+            }
+        })
+        
         
     }
 
