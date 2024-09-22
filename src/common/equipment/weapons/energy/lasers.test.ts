@@ -20,7 +20,7 @@ describe('laser class tests', () => {
     it('should get all clan lvl 2 energy weapons', () => {
         const actual = laser.getLasersByTech(TechLvl.CLANTWO);
 
-        expect(actual.length).toEqual(6);
-        expect(actual[2].id).toEqual(11);
+        expect(actual.length).toEqual(7);
+        expect(actual[2].id).toEqual(13);
     })
 });

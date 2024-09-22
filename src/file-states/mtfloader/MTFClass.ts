@@ -1,57 +1,149 @@
 import { Mech } from "../../common/mech";
 
+interface RetObj {
+    chassis: string,
+    model: string,
+    mul: number,
+    config: string,
+    techbase: string,
+    era: string,
+    source: string,
+    rules: string,
+    role: string
+    quirk: string[],
+    mass: number,
+    engine: string,
+    structure: string,
+    myomer: string,
+    heatsinks: string,
+    walk: number,
+    run: number | undefined,
+    jump: number | undefined,
+    armortype: string,
+    armor: [],
+    arms: [],
+    crits: {
+        la: [],
+        ra: [],
+        lt: [],
+        rt: [],
+        ct: [],
+        hd: [],
+        ll: [],
+        rl: [],
+    }
+}
 export class MTFClass {
     private colonRegExp = new RegExp(/:/gi);
-    private commaRegExp = new RegExp(/,/gi);
+    private shallowRegExp = new RegExp(/(chassis)|(model)|(mul)|(config)|(techbase)|(era)|(source)|(rules)|(role)|(quirk)|(mass)|(engine)|(structure)|(myomer)|(heat sinks)|(walk)|(run)|(jump)/gi);
+    private multilineOptions = ['Armor', 'Weapons', 'Left Arm', 'Right Arm', 'Left Torso', 'Right Torso', 'Center Torso', 'Head', 'Left Leg', 'Right Leg'];
 
     private singeLines(line: string): string[] {
-        const isColon = line.match(this.colonRegExp);
-        const isComma = line.match(this.commaRegExp);
+        const isColon = String(line.match(this.colonRegExp));
         const keyvalTuple = ['', ''];
 
         if(isColon) {
             const splitString = line.split(':');
-            keyvalTuple[0] = splitString[0];
-            keyvalTuple[1] = splitString[1];
-        }
-
-        if(isComma) {
-            const splitString = line.split(':');
-            keyvalTuple[0] = splitString[0];
-            keyvalTuple[1] = splitString[1];
+            const first = splitString[0];
+            const second = splitString[1];
+            
+            keyvalTuple[0] = first ? first.trim() : '';
+            keyvalTuple[1] = second ? second.trim() : '';
         }
 
         return keyvalTuple;
     }
 
-    private multiLines(lines: string): string[] {
-        const isColon = lines.match(this.colonRegExp);
-        const isComma = lines.match(this.commaRegExp);
-        const keyvalTuple = ['', ''];
+    private multiLines(items: string[][]): string[][] {
+        const multis = this.multilineOptions.filter((opt, i) => {
+            let dist = 0;
+            const multi = ['', []];
+            const start = items.findIndex((item) => {
+                return item[0] === opt;
+            });
+            const end = items.findIndex((item) => {
+                return item[0] === this.multilineOptions[i+1];
+            });
+            dist = start;
 
-        return keyvalTuple
+            multi[0] = items;
+            while( dist < end) {
+                
+            }
+
+        });
+        
+        return;
     }
 
-    public reader(contents: string) {
-        const multilineOptions = ['Armor', 'Weapons', 'Left Arm', 'Right Arm', 'Left Torso', 'Right Torso', 'Center Torso', 'Head', 'Left Leg', 'Right Leg'] 
-        const retObj = {};  //currently arbitrary because could be any kind of unit except vehicles and some battle armor.
-        const firstPass = contents.split('\n');
-        const secondPass = firstPass.filter((line) => {
-            if(line !== '') { return }
+    private shallowPop(dataArray: string[][]): RetObj {
+        const shallow: RetObj = {
+            chassis: '',
+            model: '',
+            mul: 0,
+            config: '',
+            techbase: '',
+            era: '',
+            source: '',
+            rules: '',
+            role: '',
+            quirk: [],
+            mass: 0,
+            engine: '',
+            structure: '',
+            myomer: '',
+            heatsinks: '',
+            walk: 0,
+            run: 0,
+            jump: 0,
+            armortype: "",
+            armor: [],
+            arms: [],
+            crits: {
+                la: [],
+                ra: [],
+                lt: [],
+                rt: [],
+                ct: [],
+                hd: [],
+                ll: [],
+                rl: []
+            }
+        };
+
+        dataArray.filter((item) => {
+            const found = item[0].match(this.shallowRegExp);
+            const foundValue = item[1];
+            const foundKey = found as unknown as keyof RetObj;
+            if(found?.includes('quirk')) {
+                shallow['quirk'].push(foundValue)
+            } else {
+                shallow[foundKey] = foundValue as never;
+            }
         });
 
-        secondPass.forEach((line, i) => {
-            const lineSplit = line.split(':');
-            if(multilineOptions.includes(lineSplit[0])) {
-                this.multiLines()
-            }
-        })
-        
-        
+        return shallow;
     }
 
-    public readerToType(contents: string) {
+    public reader(contents: string): RetObj {
+        //const firstPass = contents.split('\n');
+        let firstPass = contents.replaceAll('\n', ',').split(',');
+        firstPass = firstPass.filter((el) => {
+            return el.length > 0;
+        });
+        const secondPass = firstPass.map((item) => {
+            return this.singeLines(item);
+        });
 
+        const retObj = this.shallowPop(secondPass);
+
+        const mutliChunks = this.multiLines(secondPass);
+        
+        return retObj;
+    }
+
+    public readerToType(contents: string): Mech {
+        return new Mech;
     }
 
     public writer(path: string, blob: Mech): boolean {

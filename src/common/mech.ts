@@ -6,6 +6,7 @@ import { InternalsFactory } from "./internals-factory";
 import { TonnageWatcher } from "./tonnage-watcher";
 
 export class Mech {
+    chassis = '';
     armor = new ArmorFactory();
     crits = new CriticalSlots();
     engine = new EngineFactory();
