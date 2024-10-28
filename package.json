@@ -11,7 +11,8 @@
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
     "check-types": "tsc --project tsconfig.json --pretty --noEmit",
-    "clean": "rimraf node_modules .vite package.lock"
+    "clean": "rimraf node_modules .vite package.lock",
+    "test": "vitest --run"
   },
   "keywords": [],
   "author": {

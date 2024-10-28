@@ -25,7 +25,21 @@ describe('MTF Class tests', () => {
         })
 
         it('should populate armaments and equipment correctly', () => {
-            expect(actual.arms?.length).toBe(12);
+            expect(actual.arms?.length).toBe(6);
+            expect(actual.arms[1][0]).toBe('Large Laser');
+            expect(actual.arms[1][1]).toBe('Right Arm');
+        })
+
+        it('should populate crits arrays correctly', () => {
+            expect(actual.crits?.ra.length).toBe(12);
+            expect(actual.crits?.la.length).toBe(12);
+            expect(actual.crits?.lt.length).toBe(12);
+            expect(actual.crits?.rt.length).toBe(12);
+            expect(actual.crits?.ct.length).toBe(12);
+            expect(actual.crits?.hd.length).toBe(12);
+            expect(actual.crits?.ll.length).toBe(12);
+            expect(actual.crits?.rl.length).toBe(12);
+            expect(actual.crits?.ra[0]).toBe('Shoulder');
         })
     })
 });

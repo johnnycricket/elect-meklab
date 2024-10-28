@@ -1,4 +1,4 @@
-import { Mech } from "../../common/mech";
+        import { Mech } from "../../common/mech";
 
 interface RetObj {
     chassis: string,
@@ -21,7 +21,7 @@ interface RetObj {
     jump: number | undefined,
     armortype: string,
     armor: [],
-    arms: [],
+    arms: string[],
     crits: {
         la: [],
         ra: [],
@@ -38,6 +38,7 @@ export class MTFClass {
     private shallowRegExp = new RegExp(/(chassis)|(model)|(mul)|(config)|(techbase)|(era)|(source)|(rules)|(role)|(quirk)|(mass)|^(engine)|(structure)|(myomer)|(heat sinks)|(walk)|(run)|(jump)$/gi);
     private multilineOptions = ['Armor', 'Weapons', 'Left Arm', 'Right Arm', 'Left Torso', 'Right Torso', 'Center Torso', 'Head', 'Left Leg', 'Right Leg'];
     private deepRegExp = new RegExp(/(armor)|(weapons)|(left arm)|(right arm)|(left torso)|(right torso)|(center torso)|(head)|(left leg)|(right leg)/gi);
+    private critRegExp = new RegExp(/^(left arm)$|^(right arm)$|^(left torso)$|^(right torso)$|^(center torso)$|^(head)$|^(left leg)$|^(right leg)$/gi);
 
 
     private singeLines(line: string): string[] {
@@ -58,15 +59,26 @@ export class MTFClass {
 
     private multiLines(items: string[][]): (string | string[][])[][] {
         const collectedMultis: (string | string[][])[][] = [];
+        let startFrom = 0;
+        let isCrit = -2;
         this.multilineOptions.filter((opt, i) => {
+            if (isCrit == -2) {
+                isCrit = opt.search(this.critRegExp);
+            }
             const start = items.findIndex((item) => {
                 return item[0] === opt;
             });
             let end: number;
+            
+            if(startFrom < start) {
+                startFrom = start;
+            }
 
             if(opt === 'Weapons'){
-                const skipAhead = parseInt(items[start + 1][1]) * 2;
-                end = start + skipAhead;
+                const skipAhead = parseInt(items[start][1]) * 2 + 1;
+                end = startFrom + skipAhead;
+            } else if(isCrit == 0) {
+                end = startFrom + 13;
             } else {
                 end = items.findIndex((item) => {
                     return item[0] === this.multilineOptions[i+1];
@@ -74,24 +86,44 @@ export class MTFClass {
             }
             
             const collected = [];
-            const count = start;
+            let count = startFrom;
 
             while(count < end) {
-                if(opt === 'Weapons') {
+                if(opt === 'Weapons' && count === start) {
+                    const weap = items[count][0];
+                    const loc = items[count][1]
+                    collected.push([weap, loc]);
+                    count++;
+                } else if(opt === 'Weapons' && count > start) {
                     const weap = items[count][0];
                     const next = count + 1;
                     const loc = items[next][0]
                     collected.push([weap, loc]);
-                    count + 2;
+                    count = count + 2;  
+                } else if(isCrit == 0) {
+                    collected.push(items[count]);
+                    count++;
                 } else {
                     collected.push(items[count]);
-                }
-                
+                    count++;
+                } 
             }
+            startFrom = end;
+            isCrit = -2;
             collectedMultis.push([opt, collected]);
         });
         
         return collectedMultis;
+    }
+
+    private unTuple(tupleArray: string[]): string[] {
+        const untupled: string[] = []; 
+        
+        tupleArray.filter((val) => {
+            untupled.push(val[0]);
+        })
+
+        return untupled;
     }
 
     private deepPop(dataArray: (string | string[][])[][]): Partial<RetObj> {
@@ -110,13 +142,15 @@ export class MTFClass {
                 rl: []
             }
         };
-        const armsArray: string[] = [];
+        let armsArray: string[] = [];
+        let critsArray: string[] = []
         
         dataArray.filter((item) => {
             console.log(item)
             
             const zerozero = item[0] as string;
             const found = zerozero.match(this.deepRegExp) as string[];
+            const foundCrit = found[0].match(this.critRegExp) as string[];
             const foundValues = item[1];
             const foundKey = found[0].toLowerCase() as unknown as keyof RetObj;
 
@@ -124,12 +158,56 @@ export class MTFClass {
                 deep['armortype'] = foundValues[0][1];
                 deep[foundKey] = foundValues as never;
             } else if(found?.includes('Weapons')) {
-                deep['arms'] = foundValues as never;
+                armsArray = foundValues as never;
+            } else if(foundCrit) {
+                critsArray = foundValues as never;
             } else {
                 deep[foundKey] = foundValues as never;
             }
-        })
-        
+
+            if(critsArray.length > 0) {
+                critsArray.filter((val) => {
+                    const loc = val[0];
+                    if(loc === 'Left Arm'){
+                        deep.crits.la = this.unTuple(critsArray) as never;
+                    }
+                    if(val[0] === 'Right Arm'){
+                        deep.crits.ra = this.unTuple(critsArray) as never;
+                    }
+                    if(val[0] === 'Right Torso'){
+                        deep.crits.rt = this.unTuple(critsArray) as never;
+                    }
+                    if(val[0] === 'Left Torso'){
+                        deep.crits.lt = this.unTuple(critsArray) as never;
+                    }
+                    if(val[0] === 'Center Torso'){
+                        deep.crits.ct = this.unTuple(critsArray) as never;
+                    }
+                    if(val[0] === 'Head'){
+                        deep.crits.hd = this.unTuple(critsArray) as never;
+                    }
+                    if(val[0] === 'Right Leg'){
+                        deep.crits.rl = this.unTuple(critsArray) as never;
+                    }
+                    if(val[0] === 'Left Leg'){
+                        deep.crits.ll = this.unTuple(critsArray) as never;
+                    }
+                });
+            }
+        });
+
+        if(armsArray.length > 0) {
+            deep.arms = armsArray;
+        }
+
+        deep.crits?.la.shift();
+        deep.crits?.ra.shift();
+        deep.crits?.lt.shift();
+        deep.crits?.rt.shift();
+        deep.crits?.ct.shift();
+        deep.crits?.ll.shift();
+        deep.crits?.rl.shift();
+
         return deep
     }
 
@@ -194,11 +272,8 @@ export class MTFClass {
         return retObj;
     }
 
-    public readerToType(contents: string): Mech {
-        return new Mech;
-    }
-
     public writer(path: string, blob: Mech): boolean {
+        // not ready for development. still focusing on reading and displaying.
         return true;
     }
 }
