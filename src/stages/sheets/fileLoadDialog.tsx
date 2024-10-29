@@ -2,14 +2,16 @@ import {dialog} from 'electron';
 import {} from 'react-dom';
 
 type FileLoadProps = {
-    filePathsOut: (newType: string[]) => void;
+    setFilePathsOut: (newType: string[]) => void;
 }
 
 export function FileLoad(
     {
-        filePathsOut
+        setFilePathsOut
     }: FileLoadProps
 ){
+   
+
     const triggerFileDialog = async () => {
         const pathPromise = await dialog.showOpenDialog(
             {
@@ -33,7 +35,7 @@ export function FileLoad(
 
         const paths = pathPromise.filePaths;
 
-        filePathsOut(paths);
+        setFilePathsOut(paths);
     }
 
     return (

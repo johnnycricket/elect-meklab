@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FileLoad } from '../stages/sheets/fileLoadDialog';
 
 interface NavProps {
-    page: 'landing' | 'lab-cbt' | 'lab-dest' | 'force';
+    page: 'sheets';
 }
 
 function RootNav(
@@ -15,37 +15,10 @@ function RootNav(
     return (
         <>
             <nav>
-                {page === 'landing' && (
+                {page === 'sheets' && (
                     <ol>
-                        <li>Main</li>
-                        <li>MekLab</li>
-                        <li>Sheets</li>
-                        <li>Force Organization</li>
+                        <li>Load File</li>
                     </ol> 
-                )}
-                {page === 'lab-cbt' && (
-                    <ol>
-                        <li>New</li>
-                        <FileLoad filePathsOut={setPaths}></FileLoad>
-                        <li>Unit Settings</li>
-                        <li>Save</li>
-                    </ol>
-                )}
-                {page === 'lab-dest' && (
-                    <ol>
-                        <li>New</li>
-                        <li>Load</li>
-                        <li>Unit Settings</li>
-                        <li>Save</li>
-                    </ol>
-                )}
-                {page === 'force' && (
-                    <ol>
-                        <li>New</li>
-                        <li>Load</li>
-                        <li>Force Settings</li>
-                        <li>Save</li>
-                    </ol>
                 )}
             </nav>
         </>
