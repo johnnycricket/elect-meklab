@@ -2,13 +2,15 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
 // import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
-import { contextBridge } from 'electron';
+import { contextBridge, ipcRenderer } from 'electron';
 
-const api = {};
+const api = {
+  loadPreferences: () => ipcRenderer.invoke('load-prefs')
+};
 
 if (process.contextIsolated) {
   try {
-    contextBridge.exposeInMainWorld('api', api)
+    contextBridge.exposeInMainWorld('electronAPI', api)
   } catch ( error ) {
     console.error(error);
   }

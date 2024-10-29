@@ -29,4 +29,6 @@
 import './index.css';
 import './index';
 
+window.electronAPI.loadPreferences()
+
 console.log('👋 This message is being logged by "renderer.ts", included via Vite');
